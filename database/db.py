@@ -89,3 +89,31 @@ def save_feedback(conversation_id, feedback):
 
     connection.commit()
     connection.close()
+
+# ---------------- DELETE ONE CONVERSATION ----------------
+
+def delete_conversation(conversation_id):
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "DELETE FROM conversations WHERE id = ?",
+        (conversation_id,)
+    )
+
+    connection.commit()
+    connection.close()
+
+
+# ---------------- CLEAR ALL CONVERSATIONS ----------------
+
+def clear_history():
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM conversations")
+
+    connection.commit()
+    connection.close()

@@ -6,7 +6,9 @@ from database.db import (
     init_db,
     save_interaction,
     get_history,
-    save_feedback
+    save_feedback,
+    delete_conversation,
+    clear_history
 )
 
 
@@ -165,6 +167,7 @@ if feature in [
                 st.success("Thank you for your feedback!")
 
 
+
 # ---------------- CONVERSATION HISTORY ----------------
 
 elif feature == "Conversation History":
@@ -174,6 +177,28 @@ elif feature == "Conversation History":
     history = get_history()
 
     if history:
+
+        if st.button("🗑️ Clear All History"):
+
+            st.session_state["confirm_clear"] = True
+
+        if st.session_state.get("confirm_clear", False):
+
+            st.warning("Are you sure you want to delete all conversations?")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                if st.button("Yes, Delete All"):
+                    clear_history()
+                    st.session_state["confirm_clear"] = False
+                    st.success("All conversations deleted!")
+                    st.rerun()
+
+            with col2:
+                if st.button("Cancel"):
+                    st.session_state["confirm_clear"] = False
+                    st.rerun()
 
         for record in history:
 
@@ -189,6 +214,14 @@ elif feature == "Conversation History":
 
                 st.write("**Feedback:**")
                 st.write(feedback if feedback else "Not provided yet")
+
+                if st.button(
+                    "🗑️ Delete Conversation",
+                    key=f"delete_{conversation_id}"
+                ):
+                    delete_conversation(conversation_id)
+                    st.success("Conversation deleted!")
+                    st.rerun()
 
     else:
         st.info("No conversation history available yet.")
