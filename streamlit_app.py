@@ -326,8 +326,6 @@ def create_conversation_pdf(
         story.append(message_table)
         story.append(Spacer(1, 12))
 
-    # PAGE NUMBER AND FOOTER
-
     def draw_page(canvas, doc):
 
         canvas.saveState()
@@ -411,72 +409,58 @@ def get_chat_title(prompt):
             "python", "list", "tuple", "dictionary",
             "function", "loop", "programming"
         ],
-
         "Java Programming": [
             "java", "jvm", "class", "object",
             "inheritance", "interface"
         ],
-
         "Artificial Intelligence": [
             "artificial intelligence", "ai"
         ],
-
         "Machine Learning": [
             "machine learning", "ml", "training data",
             "prediction model"
         ],
-
         "Deep Learning": [
             "deep learning", "neural network",
             "cnn", "rnn"
         ],
-
         "SQL": [
             "sql", "mysql", "database",
             "joins", "query", "queries"
         ],
-
         "Data Structures": [
             "data structures", "stack", "queue",
             "linked list", "tree", "graph"
         ],
-
         "Operating Systems": [
             "operating system", "os",
             "process", "thread", "deadlock"
         ],
-
         "Computer Networks": [
             "computer network", "networking",
             "tcp", "ip address", "http"
         ],
-
         "Web Development": [
             "html", "css", "javascript",
             "website", "web development"
         ],
-
         "Generative AI": [
             "generative ai", "genai",
             "large language model", "llm",
             "prompt engineering"
         ],
-
         "Cloud Computing": [
             "cloud computing", "aws",
             "azure", "cloud"
         ],
-
         "Cybersecurity": [
             "cybersecurity", "encryption",
             "hacking", "network security"
         ],
-
         "Data Science": [
             "data science", "data analysis",
             "data analytics"
         ],
-
         "Internet of Things": [
             "internet of things", "iot",
             "arduino", "raspberry pi"
@@ -741,45 +725,222 @@ if "regenerate_success" not in st.session_state:
 
 
 # --------------------------------------------------
-# CUSTOM CSS
+# CUSTOM CSS - LIGHT THEME FIX
 # --------------------------------------------------
 
 st.markdown(
     """
     <style>
 
+    /* MAIN APP */
+
     .stApp {
-        background-color: #f7f9fc;
+        background-color: #f7f9fc !important;
+        color: #263238 !important;
     }
 
+    .main .block-container {
+        color: #263238 !important;
+    }
+
+    /* SIDEBAR */
+
     [data-testid="stSidebar"] {
-        background-color: #eef2f8;
+        background-color: #eef2f8 !important;
+    }
+
+    [data-testid="stSidebar"] * {
+        color: #263238;
     }
 
     [data-testid="stSidebar"] h1 {
-        color: #243b64;
+        color: #243b64 !important;
     }
+
+    /* TITLES */
 
     .main-title {
         font-size: 34px;
         font-weight: 700;
-        color: #243b64;
+        color: #243b64 !important;
     }
 
     .subtitle {
-        color: #64748b;
+        color: #64748b !important;
         font-size: 15px;
     }
 
+    /* METRICS */
+
     [data-testid="stMetric"] {
-        background-color: white;
+        background-color: #ffffff !important;
         padding: 18px;
         border-radius: 12px;
         border: 1px solid #e5eaf2;
+        color: #263238 !important;
     }
 
-    .stButton button {
-        border-radius: 8px;
+    [data-testid="stMetric"] * {
+        color: #263238 !important;
+    }
+
+    /* HEADER AND TOOLBAR */
+
+    [data-testid="stHeader"] {
+        background-color: #f7f9fc !important;
+    }
+
+    [data-testid="stToolbar"] {
+        background-color: #f7f9fc !important;
+        color: #263238 !important;
+    }
+
+    [data-testid="stDecoration"] {
+        background-color: #f7f9fc !important;
+    }
+
+    header {
+        background-color: #f7f9fc !important;
+    }
+
+    /* BOTTOM CHAT INPUT AREA */
+
+    [data-testid="stBottom"] {
+        background-color: #f7f9fc !important;
+    }
+
+    [data-testid="stBottom"] > div {
+        background-color: #f7f9fc !important;
+    }
+
+    [data-testid="stChatInput"] {
+        background-color: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 10px !important;
+    }
+
+    [data-testid="stChatInput"] > div {
+        background-color: #ffffff !important;
+    }
+
+    [data-testid="stChatInput"] textarea {
+        background-color: #ffffff !important;
+        color: #263238 !important;
+        -webkit-text-fill-color: #263238 !important;
+        caret-color: #263238 !important;
+    }
+
+    [data-testid="stChatInput"] textarea::placeholder {
+        color: #64748b !important;
+        -webkit-text-fill-color: #64748b !important;
+    }
+
+    /* TEXT INPUTS */
+
+    input,
+    textarea {
+        background-color: #ffffff !important;
+        color: #263238 !important;
+        -webkit-text-fill-color: #263238 !important;
+        caret-color: #263238 !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #64748b !important;
+        -webkit-text-fill-color: #64748b !important;
+    }
+
+    /* DROPDOWNS */
+
+    [data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        color: #263238 !important;
+    }
+
+    [data-baseweb="select"] * {
+        color: #263238 !important;
+    }
+
+    [data-baseweb="popover"] {
+        background-color: #ffffff !important;
+    }
+
+    [data-baseweb="popover"] * {
+        color: #263238 !important;
+    }
+
+    [role="listbox"] {
+        background-color: #ffffff !important;
+    }
+
+    [role="option"] {
+        background-color: #ffffff !important;
+        color: #263238 !important;
+    }
+
+    /* BUTTONS */
+
+    .stButton button,
+    .stDownloadButton button {
+        background-color: #292724 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        border-radius: 8px !important;
+        border: 1px solid #292724 !important;
+    }
+
+    .stButton button:hover,
+    .stDownloadButton button:hover {
+        background-color: #41404a !important;
+        color: #ffffff !important;
+        border-color: #41404a !important;
+    }
+
+    .stButton button:disabled {
+        background-color: #d1d5db !important;
+        color: #64748b !important;
+        -webkit-text-fill-color: #64748b !important;
+    }
+
+    /* CHAT MESSAGES */
+
+    [data-testid="stChatMessage"] {
+        color: #263238 !important;
+    }
+
+    [data-testid="stChatMessage"] p,
+    [data-testid="stChatMessage"] li {
+        color: #263238 !important;
+    }
+
+    /* EXPANDERS */
+
+    [data-testid="stExpander"] {
+        background-color: #ffffff !important;
+        border: 1px solid #dbe3ef !important;
+        color: #263238 !important;
+    }
+
+    [data-testid="stExpander"] summary {
+        color: #263238 !important;
+    }
+
+    /* CAPTIONS AND LABELS */
+
+    .stCaption,
+    [data-testid="stCaptionContainer"] {
+        color: #64748b !important;
+    }
+
+    label {
+        color: #263238 !important;
+    }
+
+    /* DIVIDERS */
+
+    hr {
+        border-color: #dbe3ef !important;
     }
 
     </style>
@@ -1037,8 +1198,6 @@ elif page == "Chat":
 
             st.session_state.confirm_clear_current = True
 
-    # CLEAR CURRENT CHAT CONFIRMATION
-
     if st.session_state.confirm_clear_current:
 
         st.warning(
@@ -1103,8 +1262,6 @@ elif page == "Chat":
         else -1
     )
 
-    # DISPLAY MESSAGES
-
     for index, message in enumerate(st.session_state.messages):
 
         with st.chat_message(message["role"]):
@@ -1117,8 +1274,6 @@ elif page == "Chat":
 
             if timestamp:
                 st.caption(timestamp)
-
-            # DOWNLOAD INDIVIDUAL USER QUESTION AS PDF
 
             if message["role"] == "user":
 
@@ -1134,8 +1289,6 @@ elif page == "Chat":
                     mime="application/pdf",
                     key=f"download_user_question_pdf_{message['id']}"
                 )
-
-            # ASSISTANT RESPONSE OPTIONS
 
             if message["role"] == "assistant":
 
@@ -1222,8 +1375,6 @@ elif page == "Chat":
 
         safe_filename = safe_filename[:80]
 
-        # TXT EXPORT
-
         export_text = f"{current_chat_title}\n"
         export_text += "=" * 40 + "\n\n"
 
@@ -1245,8 +1396,6 @@ elif page == "Chat":
             mime="text/plain",
             key="export_entire_conversation"
         )
-
-        # PDF EXPORT
 
         pdf_data = create_conversation_pdf(
             st.session_state.messages,
